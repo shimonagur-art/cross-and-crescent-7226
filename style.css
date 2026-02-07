@@ -20,7 +20,9 @@ body {
   background: #fff;
   position: sticky;
   top: 0;
-  z-index: 10;
+
+  /* ✅ IMPORTANT: must sit above Leaflet (Leaflet controls can be z-index: 1000) */
+  z-index: 2000;
 }
 
 /* ✅ title left + legend right */
@@ -179,6 +181,10 @@ body {
 
 .mapWrap { 
   min-height: 70vh; 
+
+  /* ✅ Helps ensure the map area forms its own stacking context */
+  position: relative;
+  z-index: 0;
 }
 
 #map { 
@@ -187,6 +193,10 @@ body {
   border-radius: 10px; 
   border: 1px solid #e6e6e6; 
   overflow: hidden; 
+
+  /* ✅ CRITICAL: create stacking context so Leaflet UI can't sit above the sticky header */
+  position: relative;
+  z-index: 0;
 }
 
 /* ================= Side Panel ================= */
